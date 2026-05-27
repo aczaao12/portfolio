@@ -15,14 +15,14 @@ export const projects: Project[] = [
     titleKey: "projects.items.union.title",
     descKey: "projects.items.union.desc",
     tech: ["Next.js", "MySQL", "AI Agent"],
-    image: "/projects/union.png",
+    image: "/projects/DH23VT.png",
   },
   {
     id: "fire",
     titleKey: "projects.items.fire.title",
     descKey: "projects.items.fire.desc",
     tech: ["Next.js", "Tailwind CSS"],
-    image: "/projects/fire.png",
+    image: "/projects/fire-english-club.png",
   },
   {
     id: "qr",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     titleKey: "projects.items.banking.title",
     descKey: "projects.items.banking.desc",
     tech: ["Next.js", "Database", "Monopoly"],
-    image: "/projects/banking.png",
+    image: "/projects/monopoly.png",
     inProgress: true,
   },
 ];

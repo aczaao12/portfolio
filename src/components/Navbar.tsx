@@ -40,9 +40,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="text-lg font-bold text-primary dark:text-primary-light"
+            className="flex items-center"
           >
-            HT
+            <img src="/logo.png" alt="HT" className="h-8 w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6">

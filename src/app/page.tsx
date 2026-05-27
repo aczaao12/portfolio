@@ -95,13 +95,31 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const hadDark = html.classList.contains("dark");
+    html.classList.add("dark");
+    const observer = new MutationObserver(() => {
+      if (!html.classList.contains("dark")) {
+        html.classList.add("dark");
+      }
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+    return () => {
+      observer.disconnect();
+      if (!hadDark) {
+        html.classList.remove("dark");
+      }
+    };
+  }, []);
+
   const subtitleWords = t.hero.subtitle.split(" ");
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <HeroScene />
 
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cream/30 dark:from-primary-dark/10 dark:via-transparent dark:to-primary-dark/5 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cream/30 dark:from-primary-dark/10 dark:via-transparent dark:to-primary-dark/5" />
 
       <div className="relative z-10 text-center px-4 max-w-3xl">
         <motion.p
