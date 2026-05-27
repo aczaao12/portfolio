@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "skills": "Kỹ năng",
+    "projects": "Dự án",
+    "contact": "Liên hệ"
+  },
+  "hero": {
+    "greeting": "Xin chào, tôi là",
+    "name": "Hồ Quốc Thắng",
+    "tagline": "Food Tech Engineer × AI Product Builder",
+    "subtitle": "Sinh viên Công nghệ Thực phẩm | AI Agent Builder | Web Developer",
+    "cta": "Khám phá",
+    "contact": "Liên hệ"
+  },
+  "about": {
+    "title": "Giới thiệu",
+    "birth": "26/12/2005",
+    "from": "Đồng Tháp",
+    "major": "Công nghệ Thực phẩm",
+    "specialty": "Bảo quản chế biến nông sản và vi sinh thực phẩm",
+    "position": "Ủy viên BCH Chi đoàn DH23VT",
+    "gpa": "GPA: 3.3 / 8.03",
+    "status": "Đang học kỹ sư ngành Công nghệ Thực phẩm",
+    "bio": "Là một sinh viên đam mê công nghệ và thực phẩm, tôi kết hợp kiến thức chuyên ngành với khả năng xây dựng sản phẩm số để tạo ra những giải pháp hữu ích."
+  },
+  "skills": {
+    "title": "Kỹ năng",
+    "foodtech": "Công nghệ Thực phẩm",
+    "tech": "AI & Công nghệ",
+    "items": {
+      "word": "Word",
+      "powerpoint": "PowerPoint",
+      "excel": "Excel",
+      "access": "Access",
+      "preservation": "Bảo quản & chế biến nông sản",
+      "microbiology": "Vi sinh thực phẩm",
+      "aiagent": "AI Agent Prompt-to-Product",
+      "webdev": "Web Development (Next.js)",
+      "qrscan": "QR Code điểm danh",
+      "banking": "Hệ thống Banking (Monopoly)",
+      "tools": "Zalo, FB, Telegram, Discord",
+      "media": "TikTok, Facebook, YouTube"
+    }
+  },
+  "projects": {
+    "title": "Dự án",
+    "viewDemo": "Xem Demo",
+    "viewSource": "Xem Source",
+    "inProgress": "Đang phát triển",
+    "items": {
+      "union": {
+        "title": "Web Quản lý Đoàn - Hội DH23VT",
+        "desc": "Hệ thống quản lý hoạt động đoàn hội nội bộ cho sinh viên lớp DH23VT"
+      },
+      "fire": {
+        "title": "Website FiRE ENGLISH CLUB",
+        "desc": "Trang web cho câu lạc bộ tiếng Anh FiRE"
+      },
+      "qr": {
+        "title": "QR Điểm danh",
+        "desc": "Ứng dụng scan QR code để điểm danh sinh viên"
+      },
+      "docs": {
+        "title": "Web Chia sẻ Tài liệu",
+        "desc": "Nền tảng chia sẻ tài liệu học tập"
+      },
+      "banking": {
+        "title": "Giả lập Banking (Monopoly)",
+        "desc": "Hệ thống ngân hàng giả lập cho board game Monopoly"
+      }
+    }
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "subtitle": "Kết nối với tôi qua các kênh dưới đây",
+    "email": "Email"
+  },
+  "footer": {
+    "copyright": "© 2026 Hồ Quốc Thắng. All rights reserved."
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Hồ Quốc Thắng",
+    "tagline": "Food Tech Engineer × AI Product Builder",
+    "subtitle": "Food Technology Student | AI Agent Builder | Web Developer",
+    "cta": "Explore",
+    "contact": "Get in Touch"
+  },
+  "about": {
+    "title": "About Me",
+    "birth": "Dec 26, 2005",
+    "from": "Đồng Tháp, Vietnam",
+    "major": "Food Technology",
+    "specialty": "Agricultural Product Preservation & Processing and Food Microbiology",
+    "position": "Youth Union Executive Committee Member - DH23VT",
+    "gpa": "GPA: 3.3 / 8.03",
+    "status": "Pursuing Engineering degree in Food Technology",
+    "bio": "A passionate student combining Food Technology expertise with AI-powered product development to create practical digital solutions."
+  },
+  "skills": {
+    "title": "Skills",
+    "foodtech": "Food Technology",
+    "tech": "AI & Technology",
+    "items": {
+      "word": "Word",
+      "powerpoint": "PowerPoint",
+      "excel": "Excel",
+      "access": "Access",
+      "preservation": "Agricultural Preservation & Processing",
+      "microbiology": "Food Microbiology",
+      "aiagent": "AI Agent Prompt-to-Product",
+      "webdev": "Web Development (Next.js)",
+      "qrscan": "QR Code Attendance",
+      "banking": "Banking System (Monopoly)",
+      "tools": "Zalo, FB, Telegram, Discord",
+      "media": "TikTok, Facebook, YouTube"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "viewDemo": "Live Demo",
+    "viewSource": "Source Code",
+    "inProgress": "In Progress",
+    "items": {
+      "union": {
+        "title": "DH23VT Student Union Manager",
+        "desc": "Internal management system for student union activities of class DH23VT"
+      },
+      "fire": {
+        "title": "FiRE ENGLISH CLUB Website",
+        "desc": "Official website for FiRE English Club"
+      },
+      "qr": {
+        "title": "QR Attendance System",
+        "desc": "QR code scanning application for student attendance tracking"
+      },
+      "docs": {
+        "title": "Document Sharing Platform",
+        "desc": "Platform for sharing study materials and documents"
+      },
+      "banking": {
+        "title": "Monopoly Banking Simulator",
+        "desc": "Banking system simulator for the Monopoly board game"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Connect with me through the channels below",
+    "email": "Email"
+  },
+  "footer": {
+    "copyright": "© 2026 Hồ Quốc Thắng. All rights reserved."
+  }
+}
