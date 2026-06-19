@@ -35,6 +35,7 @@ export default function Projects() {
           {projects.map((project, i) => (
             <ProjectCard
               key={project.id}
+              id={project.id}
               title={getNestedValue(t, project.titleKey)}
               desc={getNestedValue(t, project.descKey)}
               tech={project.tech}

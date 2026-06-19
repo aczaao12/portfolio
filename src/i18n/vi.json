@@ -69,6 +69,10 @@
       "banking": {
         "title": "Giả lập Banking (Monopoly)",
         "desc": "Hệ thống ngân hàng giả lập cho board game Monopoly"
+      },
+      "awing": {
+        "title": "AWING Auto Login",
+        "desc": "App chạy nền cho Windows — phát hiện mất Internet, tự động đăng nhập lại WiFi Awing"
       }
     }
   },

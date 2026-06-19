@@ -69,6 +69,10 @@
       "banking": {
         "title": "Monopoly Banking Simulator",
         "desc": "Banking system simulator for the Monopoly board game"
+      },
+      "awing": {
+        "title": "AWING Auto Login",
+        "desc": "Windows background app that auto-detects Internet loss and re-authenticates with Awing WiFi captive portal"
       }
     }
   },

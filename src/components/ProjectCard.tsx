@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 interface ProjectCardProps {
+  id: string;
   title: string;
   desc: string;
   tech: string[];
@@ -15,6 +17,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({
+  id,
   title,
   desc,
   tech,
@@ -27,14 +30,15 @@ export default function ProjectCard({
   const { t } = useLang();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
-      className="group relative bg-surface dark:bg-surface-dark rounded-xl overflow-hidden border border-border dark:border-border-dark hover:border-primary/30 dark:hover:border-primary-light/30 transition-all duration-300"
-    >
+    <Link href={`/projects/${id}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        whileHover={{ y: -8 }}
+        className="group relative bg-surface dark:bg-surface-dark rounded-xl overflow-hidden border border-border dark:border-border-dark hover:border-primary/30 dark:hover:border-primary-light/30 transition-all duration-300"
+      >
       <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary-dark/20 dark:to-primary-dark/10 flex items-center justify-center overflow-hidden">
         {image ? (
           <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -87,5 +91,6 @@ export default function ProjectCard({
         </div>
       </div>
     </motion.div>
+    </Link>
   );
 }

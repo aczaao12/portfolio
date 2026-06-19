@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản lý phiên bản AWING</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 30px 0; }
+.card { background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.1); padding: 30px; width: 680px; }
+h2 { text-align: center; margin-bottom: 20px; color: #1a1a2e; }
+.form-group { margin-bottom: 15px; }
+label { display: block; font-weight: 600; margin-bottom: 5px; color: #333; font-size: 13px; }
+input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+textarea { height: 70px; resize: vertical; }
+.changes-area { height: 110px; }
+.version-row { display: flex; gap: 6px; align-items: center; }
+.version-row input { flex: 1; }
+.btn-bump { padding: 10px 16px; background: #198754; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; font-weight: 700; line-height: 1; }
+.btn-bump:hover { background: #157347; }
+.btn-group { display: flex; gap: 10px; margin-top: 20px; }
+button { padding: 12px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: 600; }
+.btn-fetch { background: #6c757d; color: #fff; }
+.btn-save { background: #0d6efd; color: #fff; flex: 1; }
+.btn-fetch:hover { background: #5a6268; }
+.btn-save:hover { background: #0b5ed7; }
+.btn-sm { padding: 4px 10px; font-size: 12px; border-radius: 4px; }
+.btn-rollback { background: #ffc107; color: #333; }
+.btn-rollback:hover { background: #e0a800; }
+.btn-danger { background: #dc3545; color: #fff; }
+.btn-danger:hover { background: #b02a37; }
+.btn-outline { background: transparent; border: 1px solid #ccc; color: #555; }
+.btn-outline:hover { background: #f0f0f0; }
+.status { margin-top: 15px; padding: 10px; border-radius: 6px; display: none; font-size: 14px; }
+.status.success { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.status.error { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.status.warn { display: block; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.info { margin-top: 12px; padding: 10px; background: #e2e3e5; border-radius: 6px; font-size: 12px; color: #555; word-break: break-all; }
+
+/* Current version */
+.current-box { margin-bottom: 20px; }
+.current-box h3 { font-size: 14px; color: #555; margin-bottom: 8px; }
+.current-entry { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid #0d6efd; border-radius: 8px; background: #f0f7ff; }
+.current-entry .ver-tag { background: #0d6efd; color: #fff; padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 14px; }
+.current-entry .ver-desc { flex: 1; color: #333; font-size: 13px; }
+.current-entry .ver-date { color: #888; font-size: 12px; white-space: nowrap; }
+.current-entry .badge-current { background: #198754; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+
+/* History list */
+.versions-list { border-top: 1px solid #eee; padding-top: 16px; }
+.versions-list h3 { font-size: 14px; color: #555; margin-bottom: 10px; }
+.versions-list h3 span { font-weight: 400; color: #999; font-size: 12px; }
+.version-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 6px; font-size: 13px; }
+.version-item .ver-tag { background: #6c757d; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; white-space: nowrap; }
+.version-item .ver-desc { flex: 1; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.version-item .ver-date { color: #888; font-size: 11px; white-space: nowrap; }
+.version-item .actions { display: flex; gap: 4px; flex-shrink: 0; }
+.empty-msg { text-align: center; color: #999; padding: 20px; font-size: 13px; }
+.flex-row { display: flex; gap: 10px; align-items: center; }
+.mt-2 { margin-top: 10px; }
+.loading { display: inline-block; animation: spin 1s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Quản lý phiên bản AWING</h2>
+
+<div class="info" id="urlInfo">
+  <strong>Current:</strong> update.json |
+  <strong>History:</strong> history/{version}.json |
+  <a href="#" onclick="fetchAll(); return false;" style="color:#0d6efd;">Load all</a>
+</div>
+
+<!-- Current version -->
+<div class="current-box">
+<h3>Phiên bản hiện tại</h3>
+<div id="currentDisplay">
+  <div class="empty-msg">Chưa load dữ liệu.</div>
+</div>
+</div>
+
+<form id="updateForm">
+<div class="form-group">
+<label>Phiên bản mới</label>
+<div class="version-row">
+<input type="text" id="version" placeholder="0.0.0" required>
+<button type="button" class="btn-bump" onclick="bumpVersion()" title="Tăng patch (+1)">+</button>
+</div>
+</div>
+<div class="form-group">
+<label>Tiêu đề</label>
+<input type="text" id="title" placeholder="Cải thiện độ ổn định">
+</div>
+<div class="form-group">
+<label>Mô tả</label>
+<textarea id="description" placeholder="Fix lỗi timeout và cải thiện hiệu năng kết nối"></textarea>
+</div>
+<div class="form-group">
+<label>Chi tiết thay đổi (mỗi dòng một mục)</label>
+<textarea id="changes" class="changes-area" placeholder="Fix crash khi mất mạng đột ngột&#10;Tối ưu thời gian phát hiện mất Internet&#10;Cập nhật giao diện dark mode"></textarea>
+</div>
+<div class="form-group">
+<label>Link tải (nếu có)</label>
+<input type="url" id="download_url" placeholder="https://github.com/.../releases/tag/v0.0.15">
+</div>
+<div class="btn-group">
+<button type="button" class="btn-fetch" onclick="editCurrent()">Sửa bản hiện tại</button>
+<button type="submit" class="btn-save">Phát hành bản mới</button>
+</div>
+</form>
+<div id="status" class="status"></div>
+
+<!-- History -->
+<div class="versions-list">
+<h3>Lịch sử phiên bản <span id="historyCount"></span></h3>
+<div id="versionList"></div>
+</div>
+</div>
+
+<script>
+const BASE = 'https://ant05-efa02-default-rtdb.firebaseio.com';
+const UPDATE_URL = BASE + '/update.json';
+const HISTORY_URL = BASE + '/history.json';
+
+let currentVersion = null;   // current update.json
+let historyMap = {};         // all history entries keyed by version
+
+function setStatus(msg, type) {
+    const el = document.getElementById('status');
+    el.textContent = msg;
+    el.className = 'status ' + type;
+}
+
+function escHtml(s) {
+    if (!s) return '';
+    const d = document.createElement('div');
+    d.textContent = String(s);
+    return d.innerHTML;
+}
+
+function getVersionKey(v) {
+    return 'v' + v.version;
+}
+
+/* ---- Render UI ---- */
+
+function renderCurrent() {
+    const el = document.getElementById('currentDisplay');
+    if (!currentVersion) {
+        el.innerHTML = '<div class="empty-msg">Chưa có phiên bản hiện tại.</div>';
+        return;
+    }
+    const v = currentVersion;
+    el.innerHTML = '<div class="current-entry">' +
+        '<span class="badge-current">Current</span>' +
+        '<span class="ver-tag">v' + escHtml(v.version) + '</span>' +
+        '<span class="ver-desc">' + escHtml(v.title || v.description || '') + '</span>' +
+        '<span class="ver-date">' + escHtml(v.date || '') + '</span>' +
+        '<button class="btn-sm btn-outline" onclick="editCurrent()">Sửa</button>' +
+        '</div>';
+}
+
+function renderHistory() {
+    const el = document.getElementById('versionList');
+    const keys = Object.keys(historyMap).sort().reverse();
+    document.getElementById('historyCount').textContent = '(' + keys.length + ')';
+
+    if (keys.length === 0) {
+        el.innerHTML = '<div class="empty-msg">Chưa có lịch sử.</div>';
+        return;
+    }
+
+    el.innerHTML = keys.map(key => {
+        const v = historyMap[key];
+        const desc = v.title || v.description || '(không có mô tả)';
+        const date = v.date || '';
+        return '<div class="version-item">' +
+            '<span class="ver-tag">' + escHtml(key) + '</span>' +
+            '<span class="ver-desc">' + escHtml(desc) + '</span>' +
+            '<span class="ver-date">' + escHtml(date) + '</span>' +
+            '<div class="actions">' +
+            '<button class="btn-sm btn-rollback" onclick="rollback(\'' + escHtml(key) + '\')">Rollback</button>' +
+            '<button class="btn-sm btn-danger" onclick="deleteHistory(\'' + escHtml(key) + '\')">Xóa</button>' +
+            '</div>' +
+            '</div>';
+    }).join('');
+}
+
+function renderAll() {
+    renderCurrent();
+    renderHistory();
+}
+
+/* ---- Load from Firebase ---- */
+
+async function fetchAll() {
+    setStatus('Đang tải từ Firebase...', 'success');
+    try {
+        const [upRes, histRes] = await Promise.all([
+            fetch(UPDATE_URL),
+            fetch(HISTORY_URL)
+        ]);
+
+        if (upRes.ok) {
+            const data = await upRes.json();
+            if (data && data !== null) {
+                currentVersion = data;
+            } else {
+                currentVersion = null;
+            }
+        } else {
+            currentVersion = null;
+        }
+
+        if (histRes.ok) {
+            const data = await histRes.json();
+            historyMap = (data && typeof data === 'object' && !Array.isArray(data)) ? data : {};
+        } else {
+            historyMap = {};
+        }
+
+        renderAll();
+        setStatus('Đã tải xong. Current: ' + (currentVersion ? 'v' + currentVersion.version : '(trống)') + ', History: ' + Object.keys(historyMap).length + ' entries', 'success');
+    } catch (e) {
+        setStatus('Lỗi tải từ Firebase: ' + e.message, 'error');
+    }
+}
+
+/* ---- Form operations ---- */
+
+function fillForm(entry) {
+    document.getElementById('version').value = entry.version || '';
+    document.getElementById('title').value = entry.title || '';
+    document.getElementById('description').value = entry.description || '';
+    document.getElementById('changes').value = (entry.changes || []).join('\n');
+    document.getElementById('download_url').value = entry.download_url || '';
+}
+
+function editCurrent() {
+    if (!currentVersion) {
+        setStatus('Chưa có phiên bản hiện tại để sửa.', 'warn');
+        return;
+    }
+    fillForm(currentVersion);
+    setStatus('Đã điền form từ bản hiện tại v' + currentVersion.version, 'success');
+}
+
+function parseVersion(v) {
+    const parts = v.trim().split('.');
+    if (parts.length !== 3) return null;
+    const nums = parts.map(Number);
+    if (nums.some(isNaN)) return null;
+    return nums;
+}
+
+function bumpVersion() {
+    const el = document.getElementById('version');
+    const v = parseVersion(el.value);
+    if (!v) { setStatus('Phiên bản không hợp lệ (định dạng X.Y.Z)', 'error'); return; }
+    v[2]++;
+    el.value = v.join('.');
+    setStatus('Đã tăng lên ' + el.value, 'success');
+}
+
+function suggestNextVersion(currentVer) {
+    const v = parseVersion(currentVer);
+    if (!v) return currentVer;
+    v[2]++;
+    return v.join('.');
+}
+
+/* ---- Archive current to history before overwrite ---- */
+
+async function archiveCurrent() {
+    if (!currentVersion || !currentVersion.version) return;
+    const key = getVersionKey(currentVersion);
+    const url = BASE + '/history/' + key + '.json';
+    try {
+        await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(currentVersion)
+        });
+        historyMap[key] = currentVersion;
+    } catch (e) {
+        console.warn('Archive failed:', e);
+    }
+}
+
+/* ---- Save new version ---- */
+
+async function saveNewVersion(entry, isUpdate) {
+    setStatus('Đang lưu...', 'success');
+
+    try {
+        if (!isUpdate) {
+            await archiveCurrent();
+        }
+
+        const res = await fetch(UPDATE_URL, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(entry)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        await res.json();
+
+        currentVersion = entry;
+
+        // re-fetch history to stay in sync
+        const histRes = await fetch(HISTORY_URL);
+        if (histRes.ok) {
+            const data = await histRes.json();
+            historyMap = (data && typeof data === 'object' && !Array.isArray(data)) ? data : {};
+        }
+
+        renderAll();
+        setStatus('Đã lưu v' + entry.version + ' thành công!', 'success');
+
+        // clear form
+        if (!isUpdate) {
+            document.getElementById('version').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('changes').value = '';
+            document.getElementById('download_url').value = '';
+        }
+    } catch (e) {
+        setStatus('Lỗi lưu: ' + e.message, 'error');
+    }
+}
+
+/* ---- Rollback ---- */
+
+async function rollback(key) {
+    const entry = historyMap[key];
+    if (!entry) {
+        setStatus('Không tìm thấy ' + key + ' trong lịch sử.', 'error');
+        return;
+    }
+    if (!confirm('Rollback về ' + key + '? Bản hiện tại sẽ được archive.')) return;
+
+    // archive current first
+    await archiveCurrent();
+
+    // write chosen history entry to update.json
+    try {
+        const res = await fetch(UPDATE_URL, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(entry)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        await res.json();
+
+        currentVersion = entry;
+        renderAll();
+        setStatus('Đã rollback về ' + key + '!', 'success');
+    } catch (e) {
+        setStatus('Lỗi rollback: ' + e.message, 'error');
+    }
+}
+
+/* ---- Delete from history ---- */
+
+async function deleteHistory(key) {
+    if (!confirm('Xóa ' + key + ' khỏi lịch sử?')) return;
+
+    const url = BASE + '/history/' + key + '.json';
+    try {
+        const res = await fetch(url, {
+            method: 'DELETE'
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        await res.json();
+
+        delete historyMap[key];
+        renderHistory();
+        setStatus('Đã xóa ' + key, 'success');
+    } catch (e) {
+        setStatus('Lỗi xóa: ' + e.message, 'error');
+    }
+}
+
+/* ---- Form submit ---- */
+
+document.getElementById('updateForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const version = document.getElementById('version').value.trim();
+    if (!version) {
+        setStatus('Vui lòng nhập phiên bản', 'error');
+        return;
+    }
+
+    const isUpdate = currentVersion && currentVersion.version === version;
+
+    const changesRaw = document.getElementById('changes').value.trim();
+    const changes = changesRaw ? changesRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+    const entry = {
+        version: version,
+        date: new Date().toISOString().slice(0, 10),
+        title: document.getElementById('title').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        changes: changes,
+        download_url: document.getElementById('download_url').value.trim()
+    };
+    if (!entry.title && entry.description) entry.title = entry.description;
+
+    await saveNewVersion(entry, isUpdate);
+});
+
+/* ---- Init ---- */
+fetchAll();
+</script>
+</body>
+</html>

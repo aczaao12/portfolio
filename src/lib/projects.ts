@@ -47,4 +47,12 @@ export const projects: Project[] = [
     image: "/projects/monopoly.png",
     inProgress: true,
   },
+  {
+    id: "awing",
+    titleKey: "projects.items.awing.title",
+    descKey: "projects.items.awing.desc",
+    tech: ["C++", "Windows"],
+    image: "/projects/awing.png",
+    sourceUrl: "https://github.com/anomalyco/auto-login-awifi",
+  },
 ];
