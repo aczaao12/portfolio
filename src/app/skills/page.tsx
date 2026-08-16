@@ -2,71 +2,84 @@
 
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
-import SkillBar from "@/components/SkillBar";
 
 export default function Skills() {
   const { t } = useLang();
 
   const foodTechSkills = [
-    { name: t.skills.items.word, level: 85 },
-    { name: t.skills.items.powerpoint, level: 80 },
-    { name: t.skills.items.excel, level: 75 },
-    { name: t.skills.items.access, level: 70 },
-    { name: t.skills.items.preservation, level: 80 },
-    { name: t.skills.items.microbiology, level: 75 },
+    t.skills.items.word,
+    t.skills.items.powerpoint,
+    t.skills.items.excel,
+    t.skills.items.access,
+    t.skills.items.preservation,
+    t.skills.items.microbiology,
   ];
 
   const techSkills = [
-    { name: t.skills.items.aiagent, level: 90 },
-    { name: t.skills.items.webdev, level: 85 },
-    { name: t.skills.items.qrscan, level: 80 },
-    { name: t.skills.items.banking, level: 70 },
-    { name: t.skills.items.tools, level: 90 },
-    { name: t.skills.items.media, level: 85 },
+    t.skills.items.aiagent,
+    t.skills.items.webdev,
+    t.skills.items.qrscan,
+    t.skills.items.banking,
+    t.skills.items.tools,
+    t.skills.items.media,
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.h1
+    <div className="min-h-screen pt-28 pb-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl font-bold text-text dark:text-text-dark mb-12 text-center"
+          className="mb-16"
         >
-          <span className="text-primary dark:text-primary-light">#</span> {t.skills.title}
-        </motion.h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">{t.skills.title}</h1>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="space-y-12">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="p-6 rounded-xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
           >
-            <h2 className="text-xl font-semibold text-text dark:text-text-dark mb-6 flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-primary" />
+            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               {t.skills.foodtech}
             </h2>
-            <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
               {foodTechSkills.map((skill, i) => (
-                <SkillBar key={skill.name} name={skill.name} level={skill.level} index={i} />
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 + i * 0.05 }}
+                  className="px-4 py-2 text-sm text-text-secondary bg-surface border border-border rounded-lg hover:border-primary/40 hover:text-text transition-colors"
+                >
+                  {skill}
+                </motion.span>
               ))}
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-6 rounded-xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
           >
-            <h2 className="text-xl font-semibold text-text dark:text-text-dark mb-6 flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-primary" />
+            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               {t.skills.tech}
             </h2>
-            <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
               {techSkills.map((skill, i) => (
-                <SkillBar key={skill.name} name={skill.name} level={skill.level} index={i} />
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + i * 0.05 }}
+                  className="px-4 py-2 text-sm text-text-secondary bg-surface border border-border rounded-lg hover:border-primary/40 hover:text-text transition-colors"
+                >
+                  {skill}
+                </motion.span>
               ))}
             </div>
           </motion.div>

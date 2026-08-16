@@ -78,4 +78,71 @@ export const projectDetails: Record<string, ProjectDetail> = {
       { label: "Facebook", url: "https://facebook.com/your_page" },
     ],
   },
+  "awing-mobile": {
+    id: "awing-mobile",
+    tagline: "Tự động đăng nhập WiFi Awing trên Android",
+    badge: "v1.0.0 · Android",
+    version: "1.0.0",
+    problem: "Mạng WiFi Awing thường xuyên bị ngắt trên điện thoại, mỗi lần mất mạng phải mở browser thủ công, tìm portal và đăng nhập lại. Mất thời gian, bất tiện khi đang di chuyển.",
+    problemPoints: [
+      "WiFi Awing trên mobile thường xuyên bị ngắt, yêu cầu đăng nhập lại",
+      "Phải mở browser thủ công, tìm portal và nhập thông tin mỗi lần",
+      "Bất tiện khi đang di chuyển hoặc sử dụng điện thoại",
+      "Không có giải pháp tự động hóa trên Android",
+    ],
+    solutionPoints: [
+      "Foreground Service giám sát Internet liên tục — không bị kill",
+      "Tự động xác thực CHAP với Cloud Awing",
+      "Thông báo realtime qua Notification Android",
+      "Phục hồi Internet nhanh chóng, hoàn toàn tự động",
+    ],
+    features: [
+      {
+        icon: "📡",
+        title: "Foreground Service",
+        desc: "Chạy nền ổn định, không bị hệ thống kill. Luôn giám sát kết nối Internet.",
+      },
+      {
+        icon: "🔐",
+        title: "Tự động xác thực",
+        desc: "Tự động phát hiện portal Awing và thực hiện đăng nhập CHAP. Không cần mở trình duyệt.",
+      },
+      {
+        icon: "📱",
+        title: "Material Design UI",
+        desc: "Giao diện Material Design, theo dõi trạng thái và log realtime ngay trên màn hình chính.",
+      },
+      {
+        icon: "🔔",
+        title: "Notification thông minh",
+        desc: "Thông báo trạng thái kết nối, news từ nhà phát triển ngay trên thanh notification.",
+      },
+      {
+        icon: "🔄",
+        title: "Tự động khởi động",
+        desc: "Tùy chọn bắt đầu cùng hệ thống, luôn sẵn sàng bảo vệ kết nối của bạn.",
+      },
+      {
+        icon: "📰",
+        title: "News & Cập nhật",
+        desc: "Nhận thông báo và tin tức mới nhất từ nhà phát triển trực tiếp trong app.",
+      },
+    ],
+    guideSteps: [
+      { num: 1, title: "Cài đặt APK", desc: "Tải file APK từ bản phát hành. Cho phép cài đặt từ nguồn không xác định nếu cần." },
+      { num: 2, title: "Mở ứng dụng", desc: "Mở app AWING Auto Login. Giao diện chính hiện ra với trạng thái dịch vụ và log hoạt động." },
+      { num: 3, title: "Nhấn START MONITORING", desc: "Dịch vụ chạy nền, tự động phát hiện và xử lý khi mất Internet. Cấp quyền notification nếu được yêu cầu." },
+    ],
+    guideButtons: [
+      { label: "START / STOP", desc: "Bật hoặc tắt dịch vụ giám sát nền" },
+      { label: "Refresh", desc: "Kiểm tra kết nối Internet ngay lập tức" },
+      { label: "Clear Log", desc: "Xóa nhật ký hoạt động" },
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/anomalyco/auto-login-awifi" },
+      { label: "Telegram", url: "https://t.me/picolo125" },
+      { label: "Facebook", url: "https://web.facebook.com/pi.colo.125/" },
+      { label: "Zalo", url: "https://zalo.me/0339072926" },
+    ],
+  },
 };

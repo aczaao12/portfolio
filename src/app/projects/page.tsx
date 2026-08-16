@@ -13,25 +13,17 @@ export default function Projects() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.h1
+    <div className="min-h-screen pt-28 pb-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl font-bold text-text dark:text-text-dark mb-4 text-center"
+          className="mb-12"
         >
-          <span className="text-primary dark:text-primary-light">#</span> {t.projects.title}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center text-muted dark:text-muted-dark mb-12 max-w-lg mx-auto"
-        >
-          {t.about.bio}
-        </motion.p>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">{t.projects.title}</h1>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project, i) => (
             <ProjectCard
               key={project.id}

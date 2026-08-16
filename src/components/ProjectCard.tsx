@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useLang } from "@/contexts/LanguageContext";
+import { ArrowUpRight } from "lucide-react";
 
 interface ProjectCardProps {
   id: string;
@@ -22,75 +22,58 @@ export default function ProjectCard({
   desc,
   tech,
   image,
-  demoUrl,
-  sourceUrl,
   inProgress,
   index,
 }: ProjectCardProps) {
-  const { t } = useLang();
-
   return (
     <Link href={`/projects/${id}`}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -8 }}
-        className="group relative bg-surface dark:bg-surface-dark rounded-xl overflow-hidden border border-border dark:border-border-dark hover:border-primary/30 dark:hover:border-primary-light/30 transition-all duration-300"
+        transition={{ duration: 0.4, delay: index * 0.08 }}
+        className="group relative bg-surface rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-colors"
       >
-      <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary-dark/20 dark:to-primary-dark/10 flex items-center justify-center overflow-hidden">
-        {image ? (
-          <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        ) : (
-          <div className="text-primary/30 dark:text-primary-light/20 text-6xl font-bold">{title[0]}</div>
-        )}
-        {inProgress && (
-          <span className="absolute top-3 right-3 px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
-            {t.projects.inProgress}
-          </span>
-        )}
-      </div>
-
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-text dark:text-text-dark mb-2">{title}</h3>
-        <p className="text-sm text-muted dark:text-muted-dark mb-4 line-clamp-2">{desc}</p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tech.map((t) => (
-            <span
-              key={t}
-              className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary dark:bg-primary-light/10 dark:text-primary-light"
-            >
-              {t}
+        <div className="aspect-video bg-surface-elevated overflow-hidden relative">
+          {image ? (
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-text-secondary/20 text-5xl font-bold">
+              {title[0]}
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <ArrowUpRight className="w-5 h-5 text-text" />
+          </div>
+          {inProgress && (
+            <span className="absolute top-3 left-3 px-2 py-0.5 text-[10px] font-medium rounded-full bg-primary/20 text-primary border border-primary/20">
+              WIP
             </span>
-          ))}
+          )}
         </div>
 
-        <div className="flex gap-3">
-          {demoUrl && (
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-primary dark:text-primary-light hover:underline"
-            >
-              {t.projects.viewDemo} →
-            </a>
-          )}
-          {sourceUrl && (
-            <a
-              href={sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-muted dark:text-muted-dark hover:text-primary dark:hover:text-primary-light hover:underline"
-            >
-              {t.projects.viewSource} →
-            </a>
-          )}
+        <div className="p-5">
+          <h3 className="text-base font-semibold mb-1 group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm text-text-secondary mb-3 line-clamp-2">{desc}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {tech.map((t) => (
+              <span
+                key={t}
+                className="px-2 py-0.5 text-[11px] font-medium text-text-secondary bg-surface-elevated rounded"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
     </Link>
   );
 }

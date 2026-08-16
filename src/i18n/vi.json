@@ -21,9 +21,15 @@
     "major": "Công nghệ Thực phẩm",
     "specialty": "Bảo quản chế biến nông sản và vi sinh thực phẩm",
     "position": "Ủy viên BCH Chi đoàn DH23VT",
-    "gpa": "GPA: 3.3 / 8.03",
+    "gpa": "GPA: 3.36 / 8.07",
     "status": "Đang học kỹ sư ngành Công nghệ Thực phẩm",
-    "bio": "Là một sinh viên đam mê công nghệ và thực phẩm, tôi kết hợp kiến thức chuyên ngành với khả năng xây dựng sản phẩm số để tạo ra những giải pháp hữu ích."
+    "bio": "Là một sinh viên đam mê công nghệ và thực phẩm, tôi kết hợp kiến thức chuyên ngành với khả năng xây dựng sản phẩm số để tạo ra những giải pháp hữu ích.",
+    "workStyle": "Phong cách làm việc",
+    "workValues": [
+      "Không ngại va chạm — thẳng thắn nhận lỗi và xử lý sự cố ngay khi phát sinh, không đổ lỗi hay đùn đẩy.",
+      "Học hỏi và phản biện là cốt lõi — luôn đặt câu hỏi, thách thức cách làm cũ, và tìm giải pháp tốt hơn thay vì chấp nhận \"đủ dùng\".",
+      "Chủ động trong nhóm — không chờ ai giao việc, tự tìm vấn đề và đề xuất hướng giải quyết."
+    ]
   },
   "skills": {
     "title": "Kỹ năng",
@@ -73,6 +79,10 @@
       "awing": {
         "title": "AWING Auto Login",
         "desc": "App chạy nền cho Windows — phát hiện mất Internet, tự động đăng nhập lại WiFi Awing"
+      },
+      "awing-mobile": {
+        "title": "AWING Auto Login Android",
+        "desc": "App Android phát hiện mất Internet và tự động đăng nhập lại WiFi Awing"
       }
     }
   },

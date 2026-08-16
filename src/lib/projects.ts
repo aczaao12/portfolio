@@ -55,4 +55,12 @@ export const projects: Project[] = [
     image: "/projects/awing.png",
     sourceUrl: "https://github.com/anomalyco/auto-login-awifi",
   },
+  {
+    id: "awing-mobile",
+    titleKey: "projects.items.awing-mobile.title",
+    descKey: "projects.items.awing-mobile.desc",
+    tech: ["Java", "Android"],
+    image: "/projects/awing-android-icon.png",
+    sourceUrl: "https://github.com/anomalyco/auto-login-awifi",
+  },
 ];

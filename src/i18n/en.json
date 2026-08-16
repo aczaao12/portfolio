@@ -21,9 +21,15 @@
     "major": "Food Technology",
     "specialty": "Agricultural Product Preservation & Processing and Food Microbiology",
     "position": "Youth Union Executive Committee Member - DH23VT",
-    "gpa": "GPA: 3.3 / 8.03",
+    "gpa": "GPA: 3.36 / 8.07",
     "status": "Pursuing Engineering degree in Food Technology",
-    "bio": "A passionate student combining Food Technology expertise with AI-powered product development to create practical digital solutions."
+    "bio": "A passionate student combining Food Technology expertise with AI-powered product development to create practical digital solutions.",
+    "workStyle": "Working Style",
+    "workValues": [
+      "Not afraid of confrontation — straightforward in admitting mistakes and handling issues as they arise, no blaming or passing the buck.",
+      "Learning and critical thinking are core — always questioning, challenging the old way, and finding better solutions instead of settling for \"good enough\".",
+      "Proactive in teams — I don't wait to be told what to do; I find problems myself and propose solutions."
+    ]
   },
   "skills": {
     "title": "Skills",
@@ -73,6 +79,10 @@
       "awing": {
         "title": "AWING Auto Login",
         "desc": "Windows background app that auto-detects Internet loss and re-authenticates with Awing WiFi captive portal"
+      },
+      "awing-mobile": {
+        "title": "AWING Auto Login Android",
+        "desc": "Android app that detects Internet loss and auto-reconnects to Awing WiFi"
       }
     }
   },

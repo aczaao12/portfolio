@@ -6,6 +6,7 @@ import { useLang } from "@/contexts/LanguageContext";
 import { projects } from "@/lib/projects";
 import { projectDetails } from "@/lib/project-details";
 import AwingDetail from "@/components/projects/AwingDetail";
+import AwingMobileDetail from "@/components/projects/AwingMobileDetail";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -14,6 +15,10 @@ export default function ProjectDetailPage() {
 
   if (slug === "awing") {
     return <AwingDetail />;
+  }
+
+  if (slug === "awing-mobile") {
+    return <AwingMobileDetail />;
   }
 
   const project = projects.find((p) => p.id === slug);
